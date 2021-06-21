@@ -1,14 +1,14 @@
 import React from 'react';
 import styles from './App.module.scss';
 import { Home } from './views';
+import { ErrorBoundary, FullPageErrorFallback } from 'components';
 
 function App(): React.ReactElement {
   return (
     <div className={styles.container}>
-      <div className={styles.box}>
-        <div className={styles.h1}>测试</div>
-      </div>
-      <Home />
+      <ErrorBoundary fallbackRender={FullPageErrorFallback}>
+        <Home />
+      </ErrorBoundary>
     </div>
   );
 }
