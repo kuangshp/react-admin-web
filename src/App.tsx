@@ -2,8 +2,7 @@ import React from 'react';
 import styles from './App.module.scss';
 import { Home, Personal } from './views';
 import { ErrorBoundary, FullPageErrorFallback } from 'components';
-import { HashRouter, Link } from 'react-router-dom';
-import { Navigate, Route, Routes } from 'react-router';
+import { HashRouter, Link, Navigate, Route, Routes } from 'react-router-dom';
 function App(): React.ReactElement {
   return (
     <div className={styles.container}>
