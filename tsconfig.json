@@ -18,9 +18,26 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "noUnusedLocals": true, /*定义未使用的时候会有提示*/
+    "noUnusedParameters": true, /*检查函数中是否有未使用的变量*/
+    "noImplicitReturns": true, /*检查函数否有返回值*/
+    "typeRoots": [ /*类型声明文件*/
+      "./types",
+      "./node_modules/@types"
+    ],
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ]
   },
   "include": [
     "src"
-  ]
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
 }
