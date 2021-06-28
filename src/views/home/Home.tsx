@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'antd';
 
 export const Home: React.FC = () => {
   const errorHandler = () => {
@@ -7,6 +8,7 @@ export const Home: React.FC = () => {
 
   return (
     <>
+      <Button type="primary">按钮</Button>
       <h1 onClick={errorHandler}>首页</h1>
     </>
   );
