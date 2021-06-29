@@ -1,18 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ConfigProvider } from 'antd';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import reportWebVitals from './reportWebVitals';
+
+import { rootStore, persistor } from './store';
+import { ErrorBoundary, FullPageErrorFallback } from './components';
+import { Router } from './router';
+
 import 'moment/locale/zh-cn';
 import zhCN from 'antd/es/locale/zh_CN';
 import './assets/css/global.scss';
 import './assets/css/antd.css';
-import { rootStore, persistor } from './store';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { ErrorBoundary, FullPageErrorFallback } from './components';
-import { Router } from './router';
-const prefix: string = process.env.REACT_APP_BASE_API_URL as string;
-console.log(prefix, '当前环境');
+
 ReactDOM.render(
   <React.StrictMode>
     <ConfigProvider
