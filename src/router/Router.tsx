@@ -11,7 +11,7 @@ export const Router: React.FC = () => {
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
-            <Route path="system">
+            <Route path="system" element={<Account />}>
               <Route path="account" element={<Account />}></Route>
               <Route path="role" element={<Role />}></Route>
               <Route path="access" element={<Access />}></Route>
