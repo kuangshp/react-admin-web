@@ -1,0 +1,26 @@
+{
+  "presets": [
+    "react-app"
+  ],
+  "plugins": [
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "libraryDirectory": "lib",
+        "style": true
+      },
+      "antd"
+    ],
+    [
+      "import",
+      {
+        "libraryName": "lodash",
+        "libraryDirectory": "", //表示从库的package.json的main入口；否则默认为lib文件夹
+        "camel2DashComponentName": false
+      },
+      "lodash"
+    ]
+  ]
+}
+// https://www.npmjs.com/package/babel-plugin-import
