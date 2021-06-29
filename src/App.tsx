@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './App.module.scss';
 import { Home, Personal } from './views';
-import { ErrorBoundary, FullPageErrorFallback } from 'components';
 import { HashRouter, Link, Navigate, Route, Routes } from 'react-router-dom';
+import { ErrorBoundary, FullPageErrorFallback } from './components';
 function App(): React.ReactElement {
   return (
     <div className={styles.container}>

@@ -3,8 +3,8 @@ import { Form, Input, Button, message } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.scss';
-import { login } from 'store/slice/user.slice';
-import { useSelector, RootState } from 'store';
+import { login } from 'src/store/slice/user.slice';
+import { useSelector, RootState } from 'src/store';
 
 export const Login: React.FC = () => {
   const dispatch = useDispatch();

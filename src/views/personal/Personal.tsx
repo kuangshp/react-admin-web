@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useParams, useLocation, useSearchParams } from 'react-router-dom';
-import { useUrlQueryParam } from 'hooks';
+import { useUrlQueryParam } from 'src/hooks';
 // https://reacttraining.com/blog/react-router-v6-pre/
 export const Personal: React.FC = () => {
   const [searchParams] = useSearchParams();

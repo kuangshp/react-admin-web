@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { loginService } from 'services';
+import { loginService } from 'src/services';
 
 interface UserState {
   loading: boolean;
