@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
-export const App: React.FC = (props) => {
-  const { children } = props;
+export const App: React.FC<{ children: ReactNode }> = ({
+  children,
+}: {
+  children: ReactNode;
+}): JSX.Element => {
   return <div>{children}</div>;
 };

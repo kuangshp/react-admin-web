@@ -3,8 +3,10 @@
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "cSpell.words": [
     "antd",
+    "commitlint",
     "persistor",
     "reduxjs",
-    "serializable"
+    "serializable",
+    "stylelint"
   ]
 }
