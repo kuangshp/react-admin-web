@@ -1,24 +1,29 @@
 import React from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { MainLayout } from 'src/layout';
 import { Access, Account, Home, Login, Role } from 'src/views';
 import { App } from './App';
+import { RootState, useSelector } from 'src/store';
 
 export const Router: React.FC = () => {
+  const token: string | null = useSelector((state: RootState) => state.user.token);
+  console.log(token, '当前token');
   return (
     <HashRouter>
       <App>
         <Routes>
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="system" element={<Account />}>
-              <Route path="account" element={<Account />}></Route>
-              <Route path="role" element={<Role />}></Route>
-              <Route path="access" element={<Access />}></Route>
+          {token ? (
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="system">
+                <Route path="account" element={<Account />} />
+                <Route path="role" element={<Role />} />
+                <Route path="access" element={<Access />} />
+              </Route>
             </Route>
-          </Route>
+          ) : null}
           <Route path="login" element={<Login />} />
-          <Route path="*" element={<h1>没有页面</h1>} />
+          <Route path="*" element={<Navigate to="login" />} />
         </Routes>
       </App>
     </HashRouter>
