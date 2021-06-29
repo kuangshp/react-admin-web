@@ -4,8 +4,6 @@ import { authToken } from '../constants';
 import { message as Message } from 'antd';
 
 const prefix: string = process.env.REACT_APP_BASE_API_URL as string;
-const iamPrefix: string = process.env.REACT_APP_BASE_IMG_URL as string;
-
 interface IPrintPanel {
   method?: string;
   url?: string;
@@ -36,13 +34,7 @@ class Request {
     config.headers[authToken] = storage.getItem(authToken);
     // 处理请求地址
     const input = config.url as string;
-    if (this.isHttpUrl(input)) {
-      config.url = input;
-    } else if (this.isIamUrl(input)) {
-      config.url = `${iamPrefix}${input}`;
-    } else {
-      config.url = `${prefix}${input}`;
-    }
+    config.url = `${prefix}${input}`;
     return config;
   }
 
@@ -51,7 +43,7 @@ class Request {
    * @param rejection
    */
   private requestError(rejection: { data: unknown }) {
-    return this.useOrigin(rejection) ? Promise.reject(rejection) : Promise.reject(rejection.data);
+    return Promise.reject(rejection.data);
   }
 
   /**
@@ -69,17 +61,17 @@ class Request {
         } else {
           Message.error(message);
           // 将失败的接口打印到控制台上
-          this.printPanel({ method, url, data });
+          this.printPanel('后端返回失败', { method, url, data });
           return Promise.reject(message);
         }
       } else {
         // 将失败的接口打印到控制台上
-        this.printPanel({ method, url, data });
+        this.printPanel('请求没data', { method, url, data });
         return Promise.reject(response);
       }
     } else {
       // 将失败的接口打印到控制台上
-      this.printPanel({ method, url, data });
+      this.printPanel('http请求失败', { method, url, data });
       return Promise.reject(response);
     }
   }
@@ -90,8 +82,8 @@ class Request {
    */
   private responseError(error: AxiosError) {
     if (error.response && error.response.status) {
-      let $path = '';
-      let $errorInfo = '';
+      let $path: string = '';
+      let $errorInfo: string = '';
       if (error.response.data) {
         const { path, data } = error.response.data;
         $path = path;
@@ -128,19 +120,6 @@ class Request {
     return error.response ? Promise.reject(error.response) : Promise.reject(error);
   }
 
-  private isHttpUrl(input: string) {
-    return /^https?:\/\//.test(input);
-  }
-
-  // 判断是不是图片请求
-  private isIamUrl(input: string) {
-    return /^(sso|iam|iam-.*)\//.test(input);
-  }
-
-  private useOrigin(res: any) {
-    return res.config.useOrigin;
-  }
-
   /**
    * @Author: 水痕
    * @Date: 2021-05-21 15:50:15
@@ -149,9 +128,9 @@ class Request {
    * @param {*}
    * @return {*}
    */
-  private printPanel(params: IPrintPanel): void {
+  private printPanel(type: string, params: IPrintPanel): void {
     const str: string = `
-    =========================================>
+    ==================${type}=======================>
     请求方式: ${params?.method} \n
     请求的url: ${params?.url} \n
     请求体: ${params?.data}
