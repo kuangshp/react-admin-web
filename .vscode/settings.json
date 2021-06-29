@@ -2,6 +2,9 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "cSpell.words": [
-    "antd"
+    "antd",
+    "persistor",
+    "reduxjs",
+    "serializable"
   ]
 }
