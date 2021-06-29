@@ -24,7 +24,12 @@ module.exports = {
     'prettier/prettier': 'error',
     'arrow-body-style': 'off',
     'prefer-arrow-callback': 'off',
+    // 关闭类型推断
+    '@typescript-eslint/no-inferrable-types': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    'no-unused-vars': 'off',
+    'react/prop-types': 'off',
+    'react/display-name': 'off',
   },
 };

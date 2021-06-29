@@ -1,13 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ConfigProvider } from 'antd';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'moment/locale/zh-cn';
+import zhCN from 'antd/es/locale/zh_CN';
 import './assets/css/global.scss';
 import './assets/css/antd.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ConfigProvider
+      locale={zhCN}
+      getPopupContainer={() => document.getElementById('root') || document.createElement('div')}
+    >
+      <App />
+    </ConfigProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
