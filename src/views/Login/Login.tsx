@@ -17,7 +17,6 @@ export const Login: React.FC = () => {
     }
   }, [token, history]);
   // 提交事件
-  // eslint-disable-next-line
   const onFinish = (values: { username: string; password: string }) => {
     console.log('Success:', values, typeof values);
     const postData = {

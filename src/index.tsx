@@ -11,7 +11,8 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ErrorBoundary, FullPageErrorFallback } from './components';
 import { Router } from './router';
-
+const prefix: string = process.env.REACT_APP_BASE_API_URL as string;
+console.log(prefix, '当前环境');
 ReactDOM.render(
   <React.StrictMode>
     <ConfigProvider

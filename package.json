@@ -21,6 +21,7 @@
     "moment": "^2.29.1",
     "qs": "^6.10.1",
     "react": "^17.0.2",
+    "react-app-rewired": "^2.1.8",
     "react-document-title": "^2.0.3",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
@@ -37,9 +38,11 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "dotenv -e .env.development react-app-rewired start",
+    "build:prod": "dotenv -e .env.production react-app-rewired build",
+    "build:uat": "dotenv -e .env.uat react-app-rewired build",
+    "build:fat": "dotenv -e .env.fat react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "prepare": "husky install"
   },
@@ -62,12 +65,15 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.14.5",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
     "@types/lodash": "^4.14.170",
     "@types/qs": "^6.9.6",
     "@types/react-document-title": "^2.0.4",
     "@types/redux-logger": "^3.0.8",
+    "customize-cra": "^1.0.0",
+    "dotenv-cli": "^4.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "husky": ">=6",
