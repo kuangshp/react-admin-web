@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-
+// eslint-disable-next-line
 const middlewareHandler = (getDefaultMiddleware: any) => {
   const middlewareList = [
     ...getDefaultMiddleware({

@@ -1,3 +1,4 @@
 export type ObjectType = {
-  [propsName: string]: unknown;
+  // eslint-disable-next-line
+  [propsName: string]: any;
 };
