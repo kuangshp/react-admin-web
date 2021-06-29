@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Layout, Menu } from 'antd';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { FolderOpenOutlined, FileTextOutlined } from '@ant-design/icons';
 import { useSelector, RootState } from 'src/store';
 import styles from './MainSideNav.module.scss';
@@ -8,7 +8,7 @@ import { IMenus, menus } from './menus';
 import { getTreeList } from 'src/utils';
 
 export const MainSideNav: React.FC = () => {
-  const navigate = useNavigate();
+  const histroy = useHistory();
   const location = useLocation();
   const collapsed: boolean = useSelector((state: RootState) => state.collapsed.collapsed);
   const [menusDataList, setMenusDataList] = useState<IMenus[]>([]);
@@ -46,11 +46,11 @@ export const MainSideNav: React.FC = () => {
     // 设置当前选中的
     // setSelectKey(key);
     console.log(openKey, selectKey);
-    navigate(toPath);
+    histroy.push(toPath);
   };
   return (
     <Layout.Sider trigger={null} collapsible collapsed={collapsed} className={styles['app-side']}>
-      <div className={styles.logo} onClick={() => navigate('/home')} />
+      <div className={styles.logo} onClick={() => histroy.push('/home')} />
       {/* 遍历菜单开始 */}
       <Menu
         theme="dark"
