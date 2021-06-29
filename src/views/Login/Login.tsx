@@ -1,21 +1,21 @@
 import React, { useEffect } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.scss';
 import { login } from 'src/store/slice/user.slice';
 import { useSelector, RootState } from 'src/store';
 
 export const Login: React.FC = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const token = useSelector((state: RootState) => state.user.token);
   const loading = useSelector((state: RootState) => state.user.loading);
   useEffect(() => {
     if (token) {
-      history.push('/', { replace: true });
+      navigate('/');
     }
-  }, [token, history]);
+  }, [token, navigate]);
   // 提交事件
   const onFinish = (values: { username: string; password: string }) => {
     console.log('Success:', values, typeof values);

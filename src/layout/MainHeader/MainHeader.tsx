@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Layout, Dropdown, Menu, Modal } from 'antd';
 import { MenuUnfoldOutlined, MenuFoldOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './MainHeader.module.scss';
 import { ModifyPasswordModal } from './components';
 import { useSelector, RootState } from 'src/store';
@@ -11,7 +11,7 @@ import { userSlice } from 'src/store/slice/user.slice';
 
 export const MainHeader: React.FC = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [isModifyVisible, setIsModifyVisible] = useState<boolean>(false);
   const username: string | null = useSelector((state: RootState) => state.user.username);
   const collapsed: boolean = useSelector((state: RootState) => state.collapsed.collapsed);
@@ -29,7 +29,7 @@ export const MainHeader: React.FC = () => {
       content: <h3>您确定要退出系统？</h3>,
       onOk() {
         dispatch(userSlice.actions.logout());
-        setTimeout(() => history.push('/login'), 1000);
+        setTimeout(() => navigate('/login'), 1000);
       },
       onCancel() {
         console.log('Cancel');
