@@ -1,6 +1,6 @@
 import React from 'react';
 import { Login } from 'src/views';
-import { MainLayout } from '../layout';
+import { MainLayout } from 'src/layout';
 import { HomeRoute } from './home';
 
 export interface IRouteConfig {

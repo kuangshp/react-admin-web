@@ -1,5 +1,5 @@
-import { Home } from 'src/pages';
-import { SystemRoute } from './system';
+import { Home } from 'src/views';
+import { SystemRoute } from './modules/system';
 
 export const HomeRoute = [
   {

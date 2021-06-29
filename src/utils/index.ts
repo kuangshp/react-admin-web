@@ -5,3 +5,4 @@ export * from './currency';
 export * from './data-type';
 export * from './date';
 export * from './request';
+export * from './menus';

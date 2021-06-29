@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ConfigProvider } from 'antd';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'moment/locale/zh-cn';
 import zhCN from 'antd/es/locale/zh_CN';
@@ -10,6 +9,8 @@ import './assets/css/antd.css';
 import { rootStore, persistor } from './store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { ErrorBoundary, FullPageErrorFallback } from './components';
+import { Router } from './router';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,7 +20,9 @@ ReactDOM.render(
     >
       <Provider store={rootStore}>
         <PersistGate persistor={persistor}>
-          <App />
+          <ErrorBoundary fallbackRender={FullPageErrorFallback}>
+            <Router />
+          </ErrorBoundary>
         </PersistGate>
       </Provider>
     </ConfigProvider>
