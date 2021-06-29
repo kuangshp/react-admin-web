@@ -1,10 +1,10 @@
 import React from 'react';
 import { Layout } from 'antd';
+import { Outlet } from 'react-router-dom';
 import { MainSideNav, MainHeader, MainFooter } from './..';
 import styles from './MainLayout.module.scss';
 
-export const MainLayout: React.FC = (props) => {
-  const { children } = props;
+export const MainLayout: React.FC = () => {
   return (
     <div className={styles.layout}>
       <Layout className={styles.content}>
@@ -15,7 +15,9 @@ export const MainLayout: React.FC = (props) => {
           <MainHeader />
           {/* 内容体 */}
           <Layout.Content className={styles['view-content']}>
-            <div className={styles.container}>{children}</div>
+            <div className={styles.container}>
+              <Outlet />
+            </div>
           </Layout.Content>
           {/* 底部 */}
           <Layout.Footer>
