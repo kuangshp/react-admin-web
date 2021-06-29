@@ -20,13 +20,7 @@ export const Router: React.FC = () => {
               )}
             </React.Fragment>
           ) : (
-            <PrivateRoute
-              key={path}
-              path={path}
-              title={name}
-              component={component}
-              exact
-            ></PrivateRoute>
+            <PrivateRoute key={path} path={path} title={name} component={component}></PrivateRoute>
           )
         )}
         <Route element={<h1>未找到匹配的页面</h1>} />
