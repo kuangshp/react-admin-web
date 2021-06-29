@@ -9,7 +9,7 @@ export const Router: React.FC = () => {
   const renderRoutes = (routes: IRouteConfig[], parentPath?: string) => {
     return (
       <Switch>
-        {parentPath ? <Redirect to={routes[0].path} /> : null}
+        {parentPath ? <Redirect from={parentPath} to={routes[0].path} exact /> : null}
         {routes.map(({ path, children, component, name }) =>
           children && children.length ? (
             <React.Fragment key={path}>
@@ -20,7 +20,13 @@ export const Router: React.FC = () => {
               )}
             </React.Fragment>
           ) : (
-            <PrivateRoute key={path} path={path} title={name} component={component}></PrivateRoute>
+            <PrivateRoute
+              key={path}
+              path={path}
+              title={name}
+              component={component}
+              exact
+            ></PrivateRoute>
           )
         )}
         <Route render={() => <h1>未找到匹配的页面</h1>} />
