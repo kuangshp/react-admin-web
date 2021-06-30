@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { Layout, Menu } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FolderOpenOutlined, FileTextOutlined } from '@ant-design/icons';
@@ -17,10 +17,11 @@ export const MainSideNav: React.FC = () => {
   const menus = useSelector((state: RootState) => state.menus.menusList);
 
   // 初始化菜单(格式化成树结构)
-  const initMenus = () => {
+  const initMenus = useCallback(() => {
     const menusTree = getTreeList(menus);
     setMenusDataList(menusTree);
-  };
+  }, [menus]);
+
   useEffect(() => {
     initMenus();
     // eslint-disable-next-line
