@@ -37,7 +37,7 @@ export const MainSideNav: React.FC = () => {
       // const openMenusKey = findMenus(menusDataList, location.pathname) as string;
       // setOpenKey([openMenusKey]);
     }
-  }, [location.pathname]);
+  }, [location]);
 
   // 切换菜单
   // eslint-disable-next-line
@@ -60,6 +60,7 @@ export const MainSideNav: React.FC = () => {
         defaultSelectedKeys={selectKey}
         defaultOpenKeys={openKey}
         // selectedKeys={selectKey}
+        // openKeys={openKey}
         onClick={selectMenuHandler}
       >
         {menusDataList.map((item: IMenusVo) => {
