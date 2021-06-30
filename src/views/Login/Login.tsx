@@ -30,14 +30,13 @@ export const Login: React.FC = () => {
     // eslint-disable-next-line
   }, [data]);
   // 提交事件
-  const onFinish = async (values: { username: string; password: string }) => {
+  const onFinish = (values: { username: string; password: string }) => {
     console.log('Success:', values, typeof values);
     const postData = {
       username: values.username,
       password: values.password,
     };
     dispatch(login(postData));
-    // fetchMenus();
     refetch();
   };
 
