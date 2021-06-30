@@ -4,19 +4,25 @@ export const SystemRoute = [
   {
     id: 'system/account',
     name: '账号管理',
-    path: '/system/account',
+    path: 'account',
     component: Account,
   },
   {
     id: 'system/role',
     name: '角色管理',
-    path: '/system/role',
+    path: 'role',
     component: Role,
   },
   {
     id: 'system/access',
     name: '资源管理',
-    path: '/system/access',
+    path: 'access',
+    component: Access,
+  },
+  {
+    id: 'system/file',
+    name: '文件管理',
+    path: 'file',
     component: Access,
   },
 ];

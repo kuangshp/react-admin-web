@@ -8,34 +8,22 @@ import DocumentTitle from 'react-document-title';
 import { Navigate, Route } from 'react-router-dom';
 import { RootState, useSelector } from 'src/store';
 
-// type Props = PropsWithChildren<RouteComponentProps>;
-// // 创建一个私有路由的方法
-// // eslint-disable-next-line
-// export const PrivateRoute = ({ component, title, ...rest }: any): React.ReactElement => {
-//   const token: string | null = useSelector((state: RootState) => state.user.token);
-//   const routeComponent = (props: Props): React.ReactElement => {
-//     return token || rest.path === '/login' ? (
-//       React.createElement(component, props)
-//     ) : (
-//       <Redirect to="/login" />
-//     );
-//   };
-//   return (
-//     <DocumentTitle title={title}>
-//       <Route render={routeComponent} {...rest} />
-//     </DocumentTitle>
-//   );
-// };
-export const foo = '';
-// eslint-disable-next-line
-export const PrivateRoute = ({ component: Component, path }: any): React.ReactElement => {
+interface Props {
+  component: React.FunctionComponent | undefined;
+  path: string;
+  title: string;
+}
+export const PrivateRoute = (props: Props): React.ReactElement | null => {
+  const { component: Component, path, title } = props;
   const token: string | null = useSelector((state: RootState) => state.user.token);
-  console.log('进来了', token);
+  console.log('进来了', token, path);
+  // TODO 判断当前路径是否在后端返回的接口菜单中
+  if (!Component) return null;
   if (!token) {
     return <Navigate to="login" />;
   }
   return (
-    <DocumentTitle title="自定义标题">
+    <DocumentTitle title={title}>
       <Route path={path} element={<Component />} />
     </DocumentTitle>
   );
