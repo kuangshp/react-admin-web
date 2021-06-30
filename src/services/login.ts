@@ -1,15 +1,9 @@
 import BaseService from './base';
-
-interface ILoginParams {
-  username: string;
-  password: string;
-}
-
+import { ILoginDto } from 'src/dto';
 class LoginService extends BaseService {
   // 登录接口
-  async loginApi(postData: ILoginParams) {
-    // eslint-disable-next-line
-    return this.post('/login', postData);
+  async loginApi<ILoginVo>(postData: ILoginDto) {
+    return this.post<ILoginVo>('/login', postData);
   }
 }
 
