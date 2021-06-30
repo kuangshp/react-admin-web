@@ -15,7 +15,12 @@ export const Router: React.FC = () => {
         </React.Fragment>
       ) : (
         <React.Fragment key={item.id}>
-          <PrivateRoute path={item.path} component={item.component} title={item.name} />
+          <PrivateRoute
+            path={item.path}
+            component={item.component}
+            title={item.name}
+            url={item.url}
+          />
         </React.Fragment>
       );
     });

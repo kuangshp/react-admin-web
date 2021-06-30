@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { loginService } from 'src/services';
 import { ILoginVo } from 'src/vo';
+import { authToken } from '../../constants';
+import { storage } from '../../utils';
 
 interface UserState {
   loading: boolean;
@@ -48,6 +50,7 @@ export const userSlice = createSlice({
       state.loading = false;
       state.token = token;
       state.username = username;
+      storage.setItem(authToken, token);
     },
     [login.rejected.type]: (state, action: PayloadAction<string | null>) => {
       state.loading = false;
