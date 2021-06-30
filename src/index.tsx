@@ -13,6 +13,8 @@ import 'moment/locale/zh-cn';
 import zhCN from 'antd/es/locale/zh_CN';
 import './assets/css/global.scss';
 import './assets/css/antd.css';
+// mock数据
+import './mock/index.js';
 
 ReactDOM.render(
   <React.StrictMode>
