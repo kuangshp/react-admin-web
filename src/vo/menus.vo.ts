@@ -11,4 +11,6 @@ export interface IMenusVo {
   sort: number;
   /**小图标 */
   icon?: string | null;
+  /**子节点*/
+  children?: IMenusVo[];
 }

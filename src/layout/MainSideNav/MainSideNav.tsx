@@ -4,16 +4,17 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { FolderOpenOutlined, FileTextOutlined } from '@ant-design/icons';
 import { useSelector, RootState } from 'src/store';
 import styles from './MainSideNav.module.scss';
-import { IMenus, menus } from './menus';
 import { getTreeList } from 'src/utils';
+import { IMenusVo } from '../../vo';
 
 export const MainSideNav: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const collapsed: boolean = useSelector((state: RootState) => state.collapsed.collapsed);
-  const [menusDataList, setMenusDataList] = useState<IMenus[]>([]);
+  const [menusDataList, setMenusDataList] = useState<IMenusVo[]>([]);
   const [selectKey, setSelectKey] = useState<string[]>([]);
   const [openKey, setOpenKey] = useState<string[]>([]);
+  const menus = useSelector((state: RootState) => state.menus.menusList);
 
   // 初始化菜单(格式化成树结构)
   const initMenus = () => {
@@ -22,6 +23,7 @@ export const MainSideNav: React.FC = () => {
   };
   useEffect(() => {
     initMenus();
+    // eslint-disable-next-line
   }, []);
 
   // 刷新的时候默认选中
@@ -60,8 +62,8 @@ export const MainSideNav: React.FC = () => {
         // selectedKeys={selectKey}
         onClick={selectMenuHandler}
       >
-        {menusDataList.map((item: IMenus) => {
-          const renderMenu = (item: IMenus) => {
+        {menusDataList.map((item: IMenusVo) => {
+          const renderMenu = (item: IMenusVo) => {
             if (item.children && item.children.length) {
               return (
                 <Menu.SubMenu
@@ -69,7 +71,7 @@ export const MainSideNav: React.FC = () => {
                   icon={item.icon ? item.icon : <FolderOpenOutlined />}
                   title={item.name}
                 >
-                  {item.children.map((childrenItem: IMenus) => renderMenu(childrenItem))}
+                  {item.children.map((childrenItem: IMenusVo) => renderMenu(childrenItem))}
                 </Menu.SubMenu>
               );
             } else {
