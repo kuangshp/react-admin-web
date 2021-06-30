@@ -20,7 +20,7 @@ export const Login: React.FC = () => {
   });
   useEffect(() => {
     if (token && !isLoading) {
-      navigate('/');
+      navigate('/home');
     }
   }, [token, navigate, isLoading]);
   useEffect(() => {
