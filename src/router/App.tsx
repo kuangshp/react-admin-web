@@ -1,5 +1,6 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode, Suspense, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Loading } from 'src/components';
 
 type Props = { children: ReactNode };
 export const App: React.FC<Props> = (props: Props): JSX.Element => {
@@ -11,5 +12,9 @@ export const App: React.FC<Props> = (props: Props): JSX.Element => {
       navigate('/home');
     }
   }, [location, navigate]);
-  return <div>{children}</div>;
+  return (
+    <Suspense fallback={<Loading />}>
+      <div>{children}</div>
+    </Suspense>
+  );
 };
