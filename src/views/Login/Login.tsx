@@ -25,7 +25,6 @@ export const Login: React.FC = () => {
   }, [token, navigate, isLoading]);
   useEffect(() => {
     if (data) {
-      console.log(data, '===11==');
       dispatch(menusSlice.actions.setMenus(data));
     }
     // eslint-disable-next-line

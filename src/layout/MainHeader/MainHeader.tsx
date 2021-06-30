@@ -29,7 +29,7 @@ export const MainHeader: React.FC = () => {
       content: <h3>您确定要退出系统？</h3>,
       onOk() {
         dispatch(userSlice.actions.logout());
-        setTimeout(() => navigate('/login'), 1000);
+        navigate('/login');
       },
       onCancel() {
         console.log('Cancel');

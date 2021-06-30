@@ -14,6 +14,7 @@ export const menusSlice = createSlice({
   initialState,
   reducers: {
     clearMenus: (state: MenusState) => {
+      console.log('====11111');
       state.menusList = [];
     },
     setMenus: (state: MenusState, action) => {

@@ -36,6 +36,7 @@ export const userSlice = createSlice({
     logout: (state) => {
       state.token = null;
       state.username = null;
+      window.localStorage.clear();
     },
   },
   extraReducers: {
