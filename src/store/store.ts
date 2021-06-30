@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
 import { userSlice } from './slice/user.slice';
 import { collapsedSlice } from './slice/collapsed.slice';
+import { menusSlice } from './slice/menus.slice';
 
 const persistConfig = {
   key: 'root',
@@ -13,6 +14,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   user: userSlice.reducer,
   collapsed: collapsedSlice.reducer,
+  menus: menusSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

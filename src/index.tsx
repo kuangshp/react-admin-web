@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { ConfigProvider } from 'antd';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import reportWebVitals from './reportWebVitals';
 
 import { rootStore, persistor } from './store';
@@ -16,20 +17,23 @@ import './assets/css/antd.css';
 // mock数据
 import './mock/index.js';
 
+const queryClient = new QueryClient();
 ReactDOM.render(
   <React.StrictMode>
-    <ConfigProvider
-      locale={zhCN}
-      getPopupContainer={() => document.getElementById('root') || document.createElement('div')}
-    >
-      <Provider store={rootStore}>
-        <PersistGate persistor={persistor}>
-          <ErrorBoundary fallbackRender={FullPageErrorFallback}>
-            <Router />
-          </ErrorBoundary>
-        </PersistGate>
-      </Provider>
-    </ConfigProvider>
+    <QueryClientProvider client={queryClient}>
+      <ConfigProvider
+        locale={zhCN}
+        getPopupContainer={() => document.getElementById('root') || document.createElement('div')}
+      >
+        <Provider store={rootStore}>
+          <PersistGate persistor={persistor}>
+            <ErrorBoundary fallbackRender={FullPageErrorFallback}>
+              <Router />
+            </ErrorBoundary>
+          </PersistGate>
+        </Provider>
+      </ConfigProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
