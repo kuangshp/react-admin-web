@@ -15,10 +15,10 @@ export const MainSideNav: React.FC = () => {
   const [selectKey, setSelectKey] = useState<string[]>([]);
   const [openKey, setOpenKey] = useState<string[]>([]);
   const menus = useSelector((state: RootState) => state.menus.menusList);
-
   // 初始化菜单(格式化成树结构)
   const initMenus = useCallback(() => {
     const menusTree = getTreeList(menus);
+    console.log(menusTree);
     setMenusDataList(menusTree);
   }, [menus]);
 
@@ -30,26 +30,27 @@ export const MainSideNav: React.FC = () => {
   // 刷新的时候默认选中
   useMemo(() => {
     if (Object.is(location.pathname, '/home')) {
-      console.log('跳转到首页', location.pathname);
       setSelectKey([]);
-      setOpenKey([]);
+      setOpenKey(['home']);
     } else {
-      setSelectKey([location.pathname]);
-      // const openMenusKey = findMenus(menusDataList, location.pathname) as string;
-      // setOpenKey([openMenusKey]);
+      setSelectKey([location.pathname.replace('/', '')]);
+      setOpenKey([location.pathname.split('/')[1]]);
     }
   }, [location]);
 
   // 切换菜单
   // eslint-disable-next-line
   const selectMenuHandler = (ev: any) => {
-    console.log('当前菜单', ev);
     const { key } = ev;
     const toPath = key && key.startsWith('/') ? key : `/${key}`;
     // 设置当前选中的
-    // setSelectKey(key);
-    console.log(openKey, selectKey);
+    setSelectKey(key);
     navigate(toPath);
+  };
+
+  // eslint-disable-next-line
+  const onOpenChange = (openKeys: any[]) => {
+    setOpenKey(openKeys[openKeys.length - 1]);
   };
   return (
     <Layout.Sider trigger={null} collapsible collapsed={collapsed} className={styles['app-side']}>
@@ -58,11 +59,10 @@ export const MainSideNav: React.FC = () => {
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={selectKey}
-        defaultOpenKeys={openKey}
-        // selectedKeys={selectKey}
-        // openKeys={openKey}
+        selectedKeys={selectKey}
+        openKeys={openKey}
         onClick={selectMenuHandler}
+        onOpenChange={onOpenChange}
       >
         {menusDataList.map((item: IMenusVo) => {
           const renderMenu = (item: IMenusVo) => {
