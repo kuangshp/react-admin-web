@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -13,13 +13,14 @@ import { IMenusVo } from '../../vo';
 export const Login: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState<boolean>(false);
   const token = useSelector((state: RootState) => state.user.token);
   const loading = useSelector((state: RootState) => state.user.loading);
   const { isLoading, refetch, data } = useQuery('menus', () => menusService.menusApi<IMenusVo>(), {
     enabled: false,
   });
   useEffect(() => {
-    if (token && !isLoading) {
+    if (token && !isLoading && isLogin) {
       navigate('/home');
     }
   }, [token, navigate, isLoading]);
@@ -38,6 +39,7 @@ export const Login: React.FC = () => {
     };
     dispatch(login(postData));
     refetch();
+    setIsLogin(true);
   };
 
   // 失败的提示
