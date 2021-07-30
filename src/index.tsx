@@ -15,7 +15,7 @@ import zhCN from 'antd/es/locale/zh_CN';
 import './assets/css/global.scss';
 import './assets/css/antd.css';
 // mock数据
-import './mock/index.js';
+// import './mock/index.js';
 
 const queryClient = new QueryClient();
 ReactDOM.render(

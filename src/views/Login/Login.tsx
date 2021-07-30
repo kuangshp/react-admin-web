@@ -23,7 +23,7 @@ export const Login: React.FC = () => {
     if (token && !isLoading && isLogin) {
       navigate('/home');
     }
-  }, [token, navigate, isLoading]);
+  }, [token, navigate, isLoading, isLogin]);
   useEffect(() => {
     if (data) {
       dispatch(menusSlice.actions.setMenus(data));
