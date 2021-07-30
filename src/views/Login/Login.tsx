@@ -25,6 +25,7 @@ export const Login: React.FC = () => {
       refetch();
       navigate('/home');
     }
+    // eslint-disable-next-line
   }, [token, navigate, isLoading, isLogin]);
   useEffect(() => {
     if (data) {
