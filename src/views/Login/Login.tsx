@@ -21,6 +21,8 @@ export const Login: React.FC = () => {
   });
   useEffect(() => {
     if (token && !isLoading && isLogin) {
+      // 拉取菜单
+      refetch();
       navigate('/home');
     }
   }, [token, navigate, isLoading, isLogin]);
@@ -38,7 +40,6 @@ export const Login: React.FC = () => {
       password: values.password,
     };
     dispatch(login(postData));
-    refetch();
     setIsLogin(true);
   };
 
