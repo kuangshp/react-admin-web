@@ -47,10 +47,14 @@ export const MainSideNav: React.FC = () => {
     setSelectKey(key);
     navigate(toPath);
   };
-
-  // eslint-disable-next-line
-  const onOpenChange = (openKeys: any[]) => {
-    setOpenKey(openKeys[openKeys.length - 1]);
+  // 点击切换菜单
+  const onOpenChange = (openKeys: React.Key[]) => {
+    if (openKeys.length) {
+      const lastOpenKey: string = openKeys[openKeys.length - 1] as string;
+      setOpenKey(lastOpenKey ? [lastOpenKey] : []);
+    } else {
+      setOpenKey([]);
+    }
   };
   return (
     <Layout.Sider trigger={null} collapsible collapsed={collapsed} className={styles['app-side']}>
