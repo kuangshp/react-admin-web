@@ -38,3 +38,28 @@ export const object2str = (data: ObjectType): string => {
 export const urlObjectParams = (data: ObjectType): string => {
   return object2str(cleanObject(data));
 };
+
+/**
+ * @Author: 水痕
+ * @Date: 2021-08-11 12:45:40
+ * @LastEditors: 水痕
+ * @Description: 去除参数中的空格字符比如"xxx   " --> "xxx"
+ * @param {ObjectType} obj
+ * @param {*} isReturnArray
+ * @return {*}
+ */
+export const objValueTrim = (obj: ObjectType, isReturnArray: boolean = true): ObjectType => {
+  const newObj: ObjectType = {};
+  for (const key in obj) {
+    if (Array.isArray(obj[key]) && isReturnArray) {
+      newObj[key] = obj[key].toString();
+    } else {
+      newObj[key] = Number.isFinite(obj[key])
+        ? obj[key].toString().trim()
+        : obj[key]
+        ? obj[key].toString().trim()
+        : '';
+    }
+  }
+  return newObj;
+};

@@ -7,7 +7,7 @@ import styles from './Login.module.scss';
 import { login } from 'src/store/slice/user.slice';
 import { menusSlice } from 'src/store/slice/menus.slice';
 import { useSelector, RootState } from 'src/store';
-import { menusService } from '../../services';
+import { MenusService } from '../../services';
 import { IMenusVo } from '../../vo';
 
 export const Login: React.FC = () => {
@@ -16,7 +16,7 @@ export const Login: React.FC = () => {
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const token = useSelector((state: RootState) => state.user.token);
   const loading = useSelector((state: RootState) => state.user.loading);
-  const { isLoading, refetch, data } = useQuery('menus', () => menusService.menusApi<IMenusVo>(), {
+  const { isLoading, refetch, data } = useQuery('menus', () => MenusService.menusApi<IMenusVo>(), {
     enabled: false,
   });
   useEffect(() => {

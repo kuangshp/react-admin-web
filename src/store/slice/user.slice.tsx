@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { loginService } from 'src/services';
+import { LoginService } from 'src/services';
 import { ILoginVo } from 'src/vo';
 import { authToken } from '../../constants';
 import { storage } from '../../utils';
@@ -21,7 +21,7 @@ const initialState: UserState = {
 export const login = createAsyncThunk(
   'user/login',
   async (params: { username: string; password: string }) => {
-    const result = await loginService.loginApi<ILoginVo>({
+    const result = await LoginService.loginApi<ILoginVo>({
       username: params.username,
       password: params.password,
     });
