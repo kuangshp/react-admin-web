@@ -9,10 +9,29 @@ interface IPrintPanel {
   url?: string;
   data?: string;
 }
+
 class Request {
   constructor() {
-    axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
-    axios.defaults.timeout = 60 * 1000;
+    // 基础的配置
+    axios.defaults = {
+      headers: {
+        post: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        },
+      },
+      timeout: 60000,
+      transformRequest: [
+        (data) => {
+          // 对 data 进行任意转换处理
+          let ret = '';
+          for (const it in data) {
+            ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&';
+          }
+          ret = ret.substr(0, ret.length - 1);
+          return ret;
+        },
+      ],
+    };
     // 拦截请求的
     axios.interceptors.request.use(
       (config: AxiosRequestConfig) => this.request(config),
@@ -28,13 +47,15 @@ class Request {
    * 成功请求的方法
    * @param config
    */
-  private request(config: AxiosRequestConfig) {
+  private request(config: AxiosRequestConfig): AxiosRequestConfig {
     // 配置请求头
     config.headers['X-Origin'] = 'admin-web';
     config.headers[authToken] = storage.getItem(authToken);
     // 处理请求地址
     const input = config.url as string;
     config.url = `${prefix}${input}`;
+    // 处理缓存
+    config = this.delBrowserCache(config);
     return config;
   }
 
@@ -42,7 +63,7 @@ class Request {
    * 失败请求的方法
    * @param rejection
    */
-  private requestError(rejection: { data: unknown }) {
+  private requestError(rejection: { data: unknown }): Promise<never> {
     return Promise.reject(rejection.data);
   }
 
@@ -50,7 +71,8 @@ class Request {
    * 成功响应的方法
    * @param response
    */
-  private response(response: AxiosResponse) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private response(response: AxiosResponse): Promise<any> {
     const status = response.status;
     const { url, method, data } = response.config;
     if ((status >= 200 && status < 300) || status === 304) {
@@ -137,6 +159,36 @@ class Request {
     <=========================================
     `;
     console.log(str);
+  }
+
+  /**
+   * @Author: 水痕
+   * @Date: 2021-11-19 20:33:42
+   * @LastEditors: 水痕
+   * @Description: 生成随机字符串
+   * @param {AxiosRequestConfig} config
+   * @return {*}
+   */
+  private delBrowserCache(config: AxiosRequestConfig): AxiosRequestConfig {
+    if (config.method) {
+      // IE上的同一个url请求会走cache
+      if (config.method.toLowerCase() === 'post' && config.url) {
+        config.url =
+          config.url.indexOf('?') > -1
+            ? config.url + '&t=' + this.generateNumber
+            : config.url + '?t=' + this.generateNumber;
+      } else if (config.method.toLowerCase() === 'get') {
+        config.params = {
+          t: this.generateNumber,
+          ...config.params,
+        };
+      }
+    }
+    return config;
+  }
+
+  private get generateNumber(): number {
+    return Number.parseInt(String(Math.random() * 10000000000));
   }
 }
 

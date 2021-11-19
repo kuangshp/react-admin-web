@@ -10,6 +10,8 @@ import { rootStore, persistor } from './store';
 import { ErrorBoundary, FullPageErrorFallback } from './components';
 import { Router } from './router';
 
+// 全局初始化请求方式
+import './utils/request';
 import 'moment/locale/zh-cn';
 import zhCN from 'antd/es/locale/zh_CN';
 import './assets/css/global.scss';

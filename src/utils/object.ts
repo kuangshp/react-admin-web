@@ -63,3 +63,17 @@ export const objValueTrim = (obj: ObjectType, isReturnArray: boolean = true): Ob
   }
   return newObj;
 };
+
+// 过滤数据中的空
+export const objCleanEmpty = (obj: ObjectType): ObjectType => {
+  const newParams: ObjectType = {};
+  for (const key in obj) {
+    if (Object.hasOwnProperty.call(obj, key)) {
+      const element = obj[key];
+      if (element !== null && element !== '') {
+        newParams[key] = element;
+      }
+    }
+  }
+  return newParams;
+};

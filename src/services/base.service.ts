@@ -1,25 +1,43 @@
 import axios from 'axios';
-import { cleanObject, urlObjectParams, ObjectType, objValueTrim } from '../utils';
+import { ObjectType, objCleanEmpty, objValueTrim } from '../utils';
 
 export default class BaseService {
   // 提供get请求方法
-  static async get<T>(url: string, params?: ObjectType): Promise<T> {
-    if (params) {
-      // 先去除左右空格，然后去除空对象，最后转换为字符类型
-      return await axios.get(`${url}?${urlObjectParams(cleanObject(objValueTrim(params)))}`);
-    } else {
-      return await axios.get(url);
-    }
+  static async get<T>(url: string, params: ObjectType = {}, clearEmptyParams = true): Promise<T> {
+    params = clearEmptyParams ? objCleanEmpty(objValueTrim(params)) : params;
+    return await axios.request({
+      method: 'GET',
+      url,
+      params,
+    });
   }
 
   // 提供post请求
-  static async post<T>(url: string, postData: ObjectType): Promise<T> {
-    return await axios.post(url, objValueTrim(postData));
+  static async post<T>(url: string, postData: ObjectType, clearEmptyData = true): Promise<T> {
+    postData = clearEmptyData ? objCleanEmpty(objValueTrim(postData)) : objValueTrim(postData);
+    return await axios.post(url, postData);
   }
 
   // 提供patch请求
-  static async patch<T>(url: string, id: number | string, postData?: ObjectType): Promise<T> {
+  static async patch<T>(
+    url: string,
+    id: number | string,
+    postData: ObjectType = {},
+    clearEmptyData = true
+  ): Promise<T> {
+    postData = clearEmptyData ? objCleanEmpty(objValueTrim(postData)) : objValueTrim(postData);
     return await axios.patch(`${url}/${id}`, objValueTrim(postData ?? {}));
+  }
+
+  // 提供put方法
+  static async put<T>(
+    url: string,
+    id: number | string,
+    postData: ObjectType = {},
+    clearEmptyData = true
+  ): Promise<T> {
+    postData = clearEmptyData ? objCleanEmpty(objValueTrim(postData)) : objValueTrim(postData);
+    return await axios.put(`${url}/${id}`, objValueTrim(postData ?? {}));
   }
 
   // 提供delete请求
