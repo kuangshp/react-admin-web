@@ -3729,6 +3729,11 @@ cache-base@^1.0.1:
     union-value "^1.0.0"
     unset-value "^1.0.0"
 
+cacheables@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.npmmirror.com/cacheables/download/cacheables-1.2.2.tgz#79dc903296453b76771ddb94646acdae33207416"
+  integrity sha512-OFYfH4OaycyIqGEqkOzjiYZOKEiyQqv/+K84u6Wzv8P5rUA3BJm+2s0NExe5G6XY9AMOykEZYg2RqVlv1l27HQ==
+
 call-bind@^1.0.0, call-bind@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/call-bind/-/call-bind-1.0.2.tgz#b1d4e89e688119c3c9a903ad30abb2f6a919be3c"
