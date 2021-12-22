@@ -12,6 +12,10 @@
     "allowSyntheticDefaultImports": true,
     // 相当于下面两个检查noImplicitAny、strictNullChecks
     "strict": true,
+    // 隐形转换为any数据类型的时候会报错
+    "noImplicitAny": true,
+    // 检查null和undefined
+    "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
